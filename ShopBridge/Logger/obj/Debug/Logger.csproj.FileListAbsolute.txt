@@ -1,0 +1,6 @@
+D:\Personal\ShopBridge\Logger\bin\Debug\Logger.dll
+D:\Personal\ShopBridge\Logger\obj\Debug\Logger.csproj.CoreCompileInputs.cache
+D:\Personal\ShopBridge\Logger\obj\Debug\Logger.dll
+D:\Personal\ShopBridge\Logger\obj\Debug\Logger.pdb
+D:\Personal\ShopBridge\Logger\bin\Debug\Logger.pdb
+D:\Personal\ShopBridge\Logger\obj\Debug\Logger.csprojAssemblyReference.cache

@@ -1,0 +1,755 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClassyMapper</name>
+    </assembly>
+    <members>
+        <member name="T:ClassyMapper.Attributes.MapAllPropertiesAttribute">
+            <summary>
+            This attribute is used to specify that all properties should be mapped.  If at least one property should
+            not be mapped, then remvoe this attribute and add MapProperty attributes instead.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapAllPropertiesAttribute.AllPropertiesType">
+            <summary>
+            Gets which properties should be included during mapping.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapAllPropertiesAttribute.AllowedBaseTypes">
+            <summary>
+            Gets the base types that are allowed to be mapped, if any.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Attributes.MapAllPropertiesAttribute.#ctor(System.Type[])">
+            <summary>
+            Constructor that takes an optional parameter indicating which properties should be included.
+            </summary>
+            <param name="allowedBaseTypes">
+            The base types that are allowed to be mapped during MapAllPropertiesTypeEnum.BaseTypeOnly. 
+            If none, entire hierarchy is assumed.
+            </param>
+        </member>
+        <member name="M:ClassyMapper.Attributes.MapAllPropertiesAttribute.#ctor(ClassyMapper.Enums.MapAllPropertiesTypeEnum,System.Type[])">
+            <summary>
+            Constructor that takes an optional parameter indicating which properties should be included.
+            </summary>
+            <param name="allPropertiesType">Which properties should be included during mapping.</param>
+            <param name="allowedBaseTypes">
+            The base types that are allowed to be mapped during MapAllPropertiesTypeEnum.BaseTypeOnly. 
+            If none, entire hierarchy is assumed.
+            </param>
+        </member>
+        <member name="T:ClassyMapper.Attributes.MapListItemAttribute">
+            <summary>
+            This attribute is used to map two classes contained in a list based on key properties that make them unique.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapListItemAttribute.KeyProperties">
+            <summary>
+            Gets or sets the list of properties to match up two items in two different lists.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Attributes.MapListItemAttribute.#ctor(System.String[])">
+            <summary>
+            Constructor that takes the names of properties to match up two items in two different lists.
+            </summary>
+            <param name="keyProperties">Names of properties to match up two items in two different lists.</param>
+        </member>
+        <member name="T:ClassyMapper.Attributes.MapPropertyAttribute">
+            <summary>
+            This attribute is used to map property values bewteen Entities and ViewModels.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapPropertyAttribute.PropertyName">
+            <summary>
+            Gets or sets the name of the property on map to/from.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapPropertyAttribute.FullName">
+            <summary>
+            Gets or sets the full class name with namespace of where to map to/from.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapPropertyAttribute.MapPropertyType">
+            <summary>
+            Gets or sets whether the property this attribute is attached to should or should not be mapped.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Attributes.MapPropertyAttribute.IsTimestamp">
+            <summary>
+            Gets or sets whether this is a mapping for a Timestamp (byte[] to/from string).
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Attributes.MapPropertyAttribute.#ctor(System.String,ClassyMapper.Enums.MapPropertyTypeEnum,System.String,System.Boolean)">
+            <summary>
+            Default constuctor that assumes the property name is based on the property this attribute is
+            associated with.
+            </summary>
+            <param name="propertyName">The name of the property to map to/from.</param>
+            <param name="mapPropertyType">Whether to include or exclude this property from mapping.</param>
+            <param name="fullName">The full class name with namespace of where to map to/from.</param>
+            <param name="isTimesatmp">T
+            rue if this property is for a Timestamp (byte[] to/from string); false otherwise.
+            </param>
+            <remarks>
+            Specifying the FullName is only necessary when you are flattening out a hierarchy 
+            that share the same property names.
+            </remarks>
+        </member>
+        <member name="T:ClassyMapper.ClassyMap">
+            <summary>
+            This class allows mapping from one class to another with the use of MapProperty attributes.  A user can
+            flatten an object hierarcy and restore it later.  All objects being mapped to MUST have a parameterless
+            constructor.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.ClearCacheObjects">
+            <summary>
+            Clear all PropertyInfo, MapPropertyAttribute, and MapAllPropertiesAttribute caching.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.New(ClassyMapper.Interfaces.IClassyMapConfig)">
+            <summary>
+            Returns a new instance of ClassyMapper.
+            </summary>
+            <param name="config">Configuration data on how the objects will be mapped.</param>
+            <returns>A new instance of ClassyMapper.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.CopyValues``2(``0,``1)">
+            <summary>
+            Copies over all Name/Type matching, settable properties; shallow copy only.
+            </summary>
+            <param name="fromObject">The object to copy from.</param>
+            <param name="toObject">The object to copy to.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.DefaultStringValues(System.Object)">
+            <summary>
+            Defaults all string properties of the class.  Strings are set to string.Empty.
+            </summary>
+            <param name="entity">The class to default properties on.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.DefaultStringValues(System.Object,System.String)">
+            <summary>
+            Defaults all string properties of the entity.
+            </summary>
+            <param name="entity">The class to default properties on.</param>
+            <param name="defaultStringValue">The value to default string values to.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.DefaultStringValuesIfNull(System.Object)">
+            <summary>
+            Defaults all fieldes of the entity if the property is null.  Strings are set to string.Empty.
+            </summary>
+            <param name="entity">The class to default properties on.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.DefaultStringValuesIfNull(System.Object,System.String)">
+            <summary>
+            Defaults all fieldes of the entity if the property is null.
+            </summary>
+            <param name="entity">The class to default properties on.</param>
+            <param name="defaultStringValue">The value to default string values to.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.DefaultStringValue(System.Object,System.Reflection.PropertyInfo,System.String)">
+            <summary>
+            Defaults the property value.
+            </summary>
+            <param name="entity">The object holding the data.</param>
+            <param name="prop">The property to set the value on.</param>
+            <param name="defaultStringValue">The default value to use for properties of type string.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetPropertyInfos(System.Type)">
+            <summary>
+            Returns the PropertyInfo objects for the given type; Checks a cache, first.
+            </summary>
+            <param name="type">The type of class to get the properties for.</param>
+            <returns>List of PropertyInfo.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetMapAllPropertiesAttribute(System.Type)">
+            <summary>
+            Returns the MapAllProperties attribute for the given type, if it exists; Checks a cache, first.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetMapPropertyAttribute(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the MapProperty attribute for the given property info, if it exists; Checks a cache, first.
+            </summary>
+            <param name="pi">The PropertyInfo object that may contain the MapProperty attribute.</param>
+            <returns>MapPropertyAttribute or null if it does not exist.</returns>
+        </member>
+        <member name="P:ClassyMapper.ClassyMap.Config">
+            <summary>
+            Gets the configuration data on how the objects will be mapped.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.#ctor(ClassyMapper.Interfaces.IClassyMapConfig)">
+            <summary>
+            Constructor that initializes all variables/properties.
+            </summary>
+            <param name="config">Configuration data on how the objects will be mapped.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.RegisterCustomMap``2(System.Action{``0,``1})">
+            <summary>
+            Registers a method to call to do custom mapping when working with a specific TFrom -> TTo combination.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="method">The method to invoke.</param>
+            <returns>Instance of this ClassyMapper for chaining.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.RegisterFromObjects``1(System.Func{``0,System.Object[]})">
+            <summary>
+            Registers a function that returns what objects to map from for a given TFrom object.
+            This allows a user to flatten a hierarchy.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <param name="func">The function to invoke when working with a TFrom object.</param>
+            <returns>Instance of this ClassyMapper for chaining.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.RegisterConstructor``2(System.Func{``0,``1})">
+            <summary>
+            Registers a method to call when creating a new TTo type object given the TFrom data.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being created.</typeparam>
+            <param name="method">The function to invoke when creating a new TTo from a TFrom mapping.</param>
+            <returns>New instance of TTo.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.MapToList``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Fully maps a list of source object of type TFrom to an IList of TTo type.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="fromObjects">The list of objects being mapped from.</param>
+            <returns>IList of type TTo.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.Map``1(System.Object)">
+            <summary>
+            Maps a single source object to an object of type TTo.
+            </summary>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="from">The object being mapped from.</param>
+            <returns>The mapped object.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.Map``1(``0,System.Object)">
+            <summary>
+            Maps a single source object to an object of type TTo that was already created.
+            </summary>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="to">The instance of the object being mapped to.</param>
+            <param name="from">The object being mapped from.</param>
+            <returns>The mapped object.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.CreateInstance(System.Type,System.Object)">
+            <summary>
+            Returns a new instance of the given toType.
+            </summary>
+            <param name="toType">The type of object to instantiate.</param>
+            <param name="from">The object being mapped from.</param>
+            <returns>New instance of the given toType.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.PerformMap(System.Type,System.Object)">
+            <summary>
+            Returns a mapped object of toType from the given from object.
+            </summary>
+            <param name="toType">The type of object to map to.</param>
+            <param name="from">The object to map from.</param>
+            <returns>The mapped object of type toType.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.PerformMap(System.Type,System.Object,System.Object)">
+            <summary>
+            Returns a mapped object of toType from the given from object.
+            </summary>
+            <param name="toType">The type of object to map to.</param>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="from">The object to map from.</param>
+            <returns>The mapped object of type toType.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.HasAtLeastOneMappingAttribute(System.Type,ClassyMapper.Attributes.MapAllPropertiesAttribute,System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})">
+            <summary>
+            Returns whether a Property Info has at least one MapProperty or MapAllProperties attribute.
+            </summary>
+            <param name="type">The Type to check.</param>
+            <param name="allAttr">The MapAllProprties attribute on the class, if it exists.</param>
+            <param name="props">The PropertyInfo objects for the type.</param>
+            <returns>True if at least one mapping attriubte exists; false otherwise.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.PerformMapOnFromProperties(System.Object,System.Reflection.PropertyInfo[],System.Object,ClassyMapper.Attributes.MapAllPropertiesAttribute,System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo},System.Collections.Generic.IDictionary{System.Reflection.PropertyInfo,System.Boolean})">
+            <summary>
+            Maps any valid properties where the MapProperty is on the From object.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="toInfos">The PropertyInfo objects of the To object.</param>
+            <param name="fromMapAllPropertiesAttr">The MapAllPropertiesAttribute the From object has, if any.</param>
+            <param name="fromObject">The instance of the object being mapped from.</param>
+            <param name="fromInfos">The PropertyInfo objects of the From object.</param>
+            <param name="propertiesMapped">The dictionary holding which PropertyInfos got mapped.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.PerformMapOnToProperties(System.Object,System.Object,ClassyMapper.Attributes.MapAllPropertiesAttribute,System.Reflection.PropertyInfo[],System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo},System.Collections.Generic.IDictionary{System.Reflection.PropertyInfo,System.Boolean},System.Boolean)">
+            <summary>
+            Maps any valid properties where the MapProperty is on the To object.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="fromObject">The instance of the object being mapped from.</param>
+            <param name="toMapAllPropertiesAttr">The MapAllPropertiesAttribute the To object has, if any.</param>
+            <param name="fromInfos">The PropertyInfo objects of the From object.</param>
+            <param name="toInfos">The PropertyInfo objects of the To object.</param>
+            <param name="propertiesMapped">The dictionary holding which PropertyInfos got mapped.</param>
+            <param name="hasAtLeastOneMappingAttributes">
+            True if either the To or From object has at least one mapping attribute.
+            </param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.MapTimestamp(System.Object,System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            Maps a Timestamp property.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="toProp">The property being mapped to.</param>
+            <param name="value">The value of this property on the from object.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.MapList(System.Object,System.Reflection.PropertyInfo,System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            Maps a sub list of objects that will map each of those children.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="toProp">The property being mapped to.</param>
+            <param name="value">The value of this property on the from object.</param>
+            <param name="fromProp">The property being mapped from.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.LoadMapListData(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo,System.Type)">
+            <summary>
+            Loads key data to find matching items in two different lists.
+            </summary>
+            <param name="fromProp">The list property on the from object.</param>
+            <param name="toProp">The list property on the to object.</param>
+            <param name="toItemType">The type of list item in the to object.</param>
+            <returns>MapListDataDto.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.MapNull(System.Object,System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo},System.Int32)">
+            <summary>
+            Maps the null from object to a defaulted 'to' object with IsNull set to true, if the property exists.
+            </summary>
+            <param name="toObject">The object being created.</param>
+            <param name="toInfos">The properties of the object being created.</param>
+            <param name="depth">The current depth of the class hierarchy.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.AssignIsNull(System.Object)">
+            <summary>
+            If the object implements IIsNullable, sets IsNull to true.
+            </summary>
+            <param name="to">The instance of the object being mapped to.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.AssignCustomMap(System.Object,System.Object)">
+            <summary>
+            Invokes any custom maps that may exist for the given to/from combination.
+            </summary>
+            <param name="to">The instance of the object being mapped to.</param>
+            <param name="from">The object being mapped from.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.AssignValue(ClassyMapper.Attributes.MapPropertyAttribute,System.Object,System.Reflection.PropertyInfo,System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            Maps the property.
+            </summary>
+            <param name="mapPropAttr">The MapProperty attribute on the Property, if any.</param>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="toProp">The property being mapped to.</param>
+            <param name="fromObject">The object being mapped from.</param>
+            <param name="fromProp">The property being mapped from.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.AreEqualTypes(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the From property type can be assigned to the To property type.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>True if the From property type can be assigned to the To propety type; false otherwise.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsFromNullableToNonNullable(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns true if the From property is nullable, but the To property is not but are the same base type.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>
+            True if the From property is nullable, but the To property is not but are the same base type; 
+            false otherwise.
+            </returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsNullableType(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the given property info represents a nullable type.
+            </summary>
+            <param name="prop">The property to inspect.</param>
+            <returns>True if the property is of Nullable type; false otherwise.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsAssignableEnumTo(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the To property is an enum and is assignable from the From property.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>True if the To property is an enum and has a matching underlying type with the From property.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsAssignableNullableEnumTo(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the To property is a nullable enum and is assignable from the From property.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>
+            True if the To property is a nullable enum and has a matching underlying type with the From property;
+            false otherwise.
+            </returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsAssignableNullableEnumFrom(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the From property is a nullable enum and the To property is assignable to it.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>
+            True if the From proeprty is a nullable enum and the To value can be assigned it; 
+            false otherwise.
+            </returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsAssignableEnumFrom(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the From property is an enum and the To property is not but are assignable.
+            </summary>
+            <param name="toProp">The property the value is being set to.</param>
+            <param name="fromProp">The property the value is coming from.</param>
+            <returns>True if the From property is an Enum but is assignable to the To property.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.IsList(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether the given property info represents a list-type object.
+            </summary>
+            <param name="prop">The property to inspect.</param>
+            <returns>True if the property is of IEnumerable type; false otherwise.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.SetValue(System.Object,System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            Sets the given value on the To object for the given property.
+            </summary>
+            <param name="toObject">The object to set the value on.</param>
+            <param name="propInfo">The property to set the value to.</param>
+            <param name="val">The value to set.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetValue(System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the value on the From object for the given property.
+            </summary>
+            <param name="fromObject">The object to get the value from</param>
+            <param name="propInfo">The property to get the value from.</param>
+            <returns>The value of the property on the From object.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.CheckForInProgress">
+            <summary>
+            Ensures the caller is not trying to use the same mapping instance in multiple threads at the same time.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.HandleNullFromObject(System.Object,System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})">
+            <summary>
+            Handles the scenario when a To object is being mapped from a null From object.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="toInfos">The PropertyInfo objects of the To object.</param>
+            <returns>The To object when the From object is null.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.CheckForMappingExceptions(System.Object,System.Object,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Reflection.PropertyInfo,System.Boolean}})">
+            <summary>
+            If applicable, throws a MappingException if a PropertyInfo did not map.
+            </summary>
+            <param name="toObject">The instance of the object being mapped to.</param>
+            <param name="fromObject">The instance of the object being mapped from.</param>
+            <param name="propertiesMapped">The dictionary holding which PropertyInfos got mapped.</param>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.CanMap(ClassyMapper.Attributes.MapPropertyAttribute,ClassyMapper.Attributes.MapAllPropertiesAttribute,System.Object,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns whether this property can be mapped.
+            </summary>
+            <param name="attr">The MapProperty attribute used to determine if it can be mapped.</param>
+            <param name="allAttr">The MapAllProperties attributed used to determine if it can be mapped.</param>
+            <param name="check">The object where the data is being mapped to/from.</param>
+            <param name="propInfo">The property info object of the property being checked.</param>
+            <returns>True if this property can be mapped; false otherwise.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetCustomMapKey(System.Type,System.Type)">
+            <summary>
+            Returns the key to look up if any custom maps exist for the given combination of to/from types.
+            </summary>
+            <param name="from">The type of object being mapped from.</param>
+            <param name="to">he type of object being mapped to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetFromObjects(System.Object)">
+            <summary>
+            Returns objects to map from, given the from object. (Used to flatten a hierarchy.)
+            </summary>
+            <param name="fromObject">The object being mapped from.</param>
+            <returns>All objects to map from.</returns>
+        </member>
+        <member name="M:ClassyMapper.ClassyMap.GetName(ClassyMapper.Attributes.MapPropertyAttribute,System.Reflection.PropertyInfo)">
+            <summary>
+            Returns the name of the property.
+            </summary>
+            <param name="attr">The property that may have the specific property name to look up.</param>
+            <param name="pi">The actual property to use if attr is not specified.</param>
+            <returns>Name of the property to use.</returns>
+        </member>
+        <member name="T:ClassyMapper.ClassyMap.MapListDataDto">
+            <summary>
+            This class holds data to help map items in different lists.
+            </summary>
+        </member>
+        <member name="T:ClassyMapper.ClassyMapConfig">
+            <summary>
+            This class contains configuration data for ClassyMapper.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.ExpressionTreeGetSetCalls">
+            <summary>
+            Gets or sets whether to use an Expression tree to assign values instead of using Reflection/PropertyInfo
+            GetValue/SetValue calls.  If you are mapping a lot of objects/properties, setting this to true should
+            speed things up a little.  If you are assigning a small amount, you will be better off setting this
+            to false.
+            Defaut: false
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.CreateToObjectFromNullFromObject">
+            <summary>
+            Gets or sets whether From object results in the to object getting created with IsNull set to true. 
+            Default: false
+            </summary>
+            <remarks>
+            Note: This is useful when you have a hierarchy and are working with local SSRS reports and want to ignore
+                  all of the IsNot Nothing checks.
+            </remarks>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.MaxNullDepth">
+            <summary>
+            Gets or sets the maximum depth to new up null objects once one is found. 
+            Default: 10
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.MapEmptyListFromNullList">
+            <summary>
+            Gets or sets whether a null list on the From object results in an empty list on the To object. 
+            Default: true
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.ThrowExceptionIfNoMatchingPropertyFound">
+            <summary>
+            Gets or sets whether to throw an exception if a MapProperty is not mapped.  
+            Default: false.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.IgnoreEnumCase">
+            <summary>
+            Gets or sets whether to ignore the case when parsing an enum.  
+            Default: true.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.ClassyMapConfig.IgnoreLists">
+            <summary>
+            Gets or sets whether to skip mapping sub lists.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.ClassyMapConfig.#ctor">
+            <summary>
+            Default constructor that defaults values.
+            </summary>
+        </member>
+        <member name="T:ClassyMapper.Enums.MapAllPropertiesTypeEnum">
+            <summary>
+            This enum is used to define whether All properties or only base type (inherited) proprties should be mapped.
+            MapProperty attributes would still be recognized
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapAllPropertiesTypeEnum.All">
+            <summary>
+            All properties from the entire inheritence hierarchy are included.
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapAllPropertiesTypeEnum.BaseTypeOnly">
+            <summary>
+            All properties below the top are included.
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapAllPropertiesTypeEnum.TopLevelOnly">
+            <summary>
+            Only properties from the current level are included.
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapAllPropertiesTypeEnum.None">
+            <summary>
+            All properties are excluded from mapping.  Only MapProperty attributes will be included.
+            </summary>
+        </member>
+        <member name="T:ClassyMapper.Enums.MapPropertyTypeEnum">
+            <summary>
+            This enum determines how MapProperty acts.
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapPropertyTypeEnum.Include">
+            <summary>
+            MapProperty should include this property to be mapped.
+            </summary>
+        </member>
+        <member name="F:ClassyMapper.Enums.MapPropertyTypeEnum.Exclude">
+            <summary>
+            MapProperty should exclude this property from being mapped.
+            </summary>
+        </member>
+        <member name="T:ClassyMapper.Exceptions.ClassyMapException">
+            <summary>
+            This exception is thrown when something prevents two classes from being mapped together.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Exceptions.ClassyMapException.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Exceptions.ClassyMapException.#ctor(System.String)">
+            <summary>
+            Constructor that takes a message.
+            </summary>
+            <param name="message">The message of the exception.</param>
+        </member>
+        <member name="M:ClassyMapper.Exceptions.ClassyMapException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor that takes a message and inner exception
+            </summary>
+            <param name="message">The message of the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:ClassyMapper.Interfaces.IClassyMap">
+            <summary>
+            This interface defines all public methods ClassyMapper exposes in case this needs to be IoC injected.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMap.Config">
+            <summary>
+            Gets the configuration data on how the objects will be mapped.
+            </summary>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.RegisterCustomMap``2(System.Action{``0,``1})">
+            <summary>
+            Registers a method to call to do custom mapping when working with a specific TFrom -> TTo combination.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="method">The method to invoke.</param>
+            <returns>Instance of this ClassyMapper for chaining.</returns>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.RegisterFromObjects``1(System.Func{``0,System.Object[]})">
+            <summary>
+            Registers a function that returns what objects to map from for a given TFrom object.
+            This allows a user to flatten a hierarchy.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <param name="func">The function to invoke when working with a TFrom object.</param>
+            <returns>Instance of this ClassyMapper for chaining.</returns>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.RegisterConstructor``2(System.Func{``0,``1})">
+            <summary>
+            Registers a method to call when creating a new TTo type object given the TFrom data.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being created.</typeparam>
+            <param name="method">The function to invoke when creating a new TTo from a TFrom mapping.</param>
+            <returns>New instance of TTo.</returns>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.MapToList``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Fully maps a list of source object of type TFrom to an IList of TTo type.
+            </summary>
+            <typeparam name="TFrom">The type of object being mapped from.</typeparam>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="fromObjects">The list of objects being mapped from.</param>
+            <returns>IList of type TTo.</returns>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.Map``1(System.Object)">
+            <summary>
+            Maps a single source object to an object of type TTo.
+            </summary>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="from">The object being mapped from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassyMapper.Interfaces.IClassyMap.Map``1(``0,System.Object)">
+            <summary>
+            Maps a single source object to an object of type TTo that was already created.
+            </summary>
+            <typeparam name="TTo">The type of object being mapped to.</typeparam>
+            <param name="to">The instance of the object being mapped to.</param>
+            <param name="from">The object being mapped from.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ClassyMapper.Interfaces.IClassyMapConfig">
+            <summary>
+            This interface defines all public methods ClassyMapperConfig exposes in case this needs to be IoC injected.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.ExpressionTreeGetSetCalls">
+            <summary>
+            Gets or sets whether to use an Expression tree to assign values instead of using Reflection/PropertyInfo
+            GetValue/SetValue calls.  If you are mapping a lot of objects/properties, setting this to true should
+            speed things up a little.  If you are assigning a small amount, you will be better off setting this
+            to false.
+            Defaut: false
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.CreateToObjectFromNullFromObject">
+            <summary>
+            Gets or sets whether From object results in the to object getting created with IsNull set to true. 
+            Default: false
+            </summary>
+            <remarks>
+            Note: This is useful when you have a hierarchy and are working with local SSRS reports and want to ignore
+                  all of the IsNot Nothing checks.
+            </remarks>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.MaxNullDepth">
+            <summary>
+            Gets or sets the maximum depth to new up null objects once one is found. 
+            Default: 10
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.MapEmptyListFromNullList">
+            <summary>
+            Gets or sets whether a null list on the From object results in an empty list on the To object. 
+            Default: true
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.ThrowExceptionIfNoMatchingPropertyFound">
+            <summary>
+            Gets or sets whether to throw an exception if a MapProperty is not mapped.  
+            Default: false.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.IgnoreEnumCase">
+            <summary>
+            Gets or sets whether to ignore the case when parsing an enum.  
+            Default: true.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IClassyMapConfig.IgnoreLists">
+            <summary>
+            Gets or sets whether to skip mapping sub lists.
+            </summary>
+        </member>
+        <member name="T:ClassyMapper.Interfaces.IIsNullable">
+            <summary>
+            This interface is used to determine if a mapped to class is actually mapped from a null object.
+            </summary>
+        </member>
+        <member name="P:ClassyMapper.Interfaces.IIsNullable.IsNull">
+            <summary>
+            Gets or sets whether the object is null.
+            </summary>
+        </member>
+    </members>
+</doc>

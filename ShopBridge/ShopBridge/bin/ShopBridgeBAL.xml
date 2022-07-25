@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ShopBridgeBAL</name>
+    </assembly>
+    <members>
+        <member name="T:ShopBridgeBAL.Customer">
+            <summary>
+            Business class of Customer
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.Customer.GetCustomers">
+            <summary>
+            This method return the all customer
+            </summary>
+            <returns>Customer List</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.Customer.GetCustomers(System.Int32)">
+            <summary>
+            This method return the all customer
+            </summary>
+            <returns>Customer List</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.Customer.SaveCustomer(ShopBridgeBAL.ICustomer)">
+            <summary>
+            Saves the customer
+            </summary>
+            <param name="_customer">Customer to save in database</param>
+        </member>
+        <member name="M:ShopBridgeBAL.Customer.UpdateCustomer(System.Int32,ShopBridgeBAL.ICustomer)">
+            <summary>
+            Update the given customer
+            </summary>
+            <param name="id">Id</param>
+            <param name="customer">Customer Object</param>
+        </member>
+        <member name="M:ShopBridgeBAL.Customer.DeleteCustomer(System.Int32)">
+            <summary>
+            Delete the customer
+            </summary>
+            <param name="id">Id to delete customer</param>
+        </member>
+        <member name="T:ShopBridgeBAL.ICustomer">
+            <summary>
+            Customer Interface
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.ICustomer.GetCustomers">
+            <summary>
+            Get Customer List
+            </summary>
+            <returns>List of customer</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ICustomer.GetCustomers(System.Int32)">
+            <summary>
+            GetCustomer
+            </summary>
+            <param name="id">Id to retrive customer</param>
+            <returns>Customer</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ICustomer.SaveCustomer(ShopBridgeBAL.ICustomer)">
+            <summary>
+            Save the customer
+            </summary>
+            <param name="customer"></param>
+        </member>
+        <member name="M:ShopBridgeBAL.ICustomer.UpdateCustomer(System.Int32,ShopBridgeBAL.ICustomer)">
+            <summary>
+            Update the Customer
+            </summary>
+            <param name="id">Id</param>
+            <param name="customer">Customer</param>
+        </member>
+        <member name="M:ShopBridgeBAL.ICustomer.DeleteCustomer(System.Int32)">
+            <summary>
+            Delete the customer
+            </summary>
+            <param name="id">Id to delete customer</param>
+        </member>
+        <member name="T:ShopBridgeBAL.IProductBL">
+            <summary>
+            Interface Product
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductBL.GetProduct">
+            <summary>
+            Get Product
+            </summary>
+            <returns>List of product</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductBL.GetProduct(System.Int32)">
+            <summary>
+            Get the product of given id
+            </summary>
+            <param name="id">Id to retrive the product</param>
+            <returns>Prodcut</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductBL.SaveProduct(ShopBridgeBAL.IProductBL)">
+            <summary>
+            Save the product
+            </summary>
+            <param name="product">Product</param>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductBL.UpdateProduct(System.Int32,ShopBridgeBAL.IProductBL)">
+            <summary>
+            Update the product
+            </summary>
+            <param name="id">Product id</param>
+            <param name="product">Product</param>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductBL.DeleteProduct(System.Int32)">
+            <summary>
+            Delete the product
+            </summary>
+            <param name="id">Product id to delete the product</param>
+        </member>
+        <member name="T:ShopBridgeBAL.IProductTypeBL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductTypeBL.GetProductTypes">
+            <summary>
+            Get Product type list
+            </summary>
+            <returns>List of product type</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductTypeBL.GetProductType(System.Int32)">
+            <summary>
+            Get Product type
+            </summary>
+            <param name="id">Product type id</param>
+            <returns>Product type</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductTypeBL.SaveProductType(ShopBridgeBAL.IProductTypeBL)">
+            <summary>
+            Save the product type
+            </summary>
+            <param name="productType">Product type to save</param>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductTypeBL.UpdateProductType(System.Int32,ShopBridgeBAL.IProductTypeBL)">
+            <summary>
+            Update the product type
+            </summary>
+            <param name="id">Id to update the product type</param>
+            <param name="productType">Product type</param>
+        </member>
+        <member name="M:ShopBridgeBAL.IProductTypeBL.DeleteProductType(System.Int32)">
+            <summary>
+            Delete the product type
+            </summary>
+            <param name="id">Product type id</param>
+        </member>
+        <member name="T:ShopBridgeBAL.ProductBL">
+            <summary>
+            Product Class
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductBL.GetProduct">
+            <summary>
+            Get all products
+            </summary>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductBL.GetProduct(System.Int32)">
+            <summary>
+            Get product for given id
+            </summary>
+            <param name="id">Product Id</param>
+            <returns>Product</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductBL.SaveProduct(ShopBridgeBAL.IProductBL)">
+            <summary>
+            Save the prodcut
+            </summary>
+            <param name="Product">Product Object</param>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductBL.UpdateProduct(System.Int32,ShopBridgeBAL.IProductBL)">
+            <summary>
+            Update the product of given id
+            </summary>
+            <param name="id">Product Id</param>
+            <param name="Product">Product</param>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductBL.DeleteProduct(System.Int32)">
+            <summary>
+            Delete the product of given id
+            </summary>
+            <param name="id">Product id</param>
+        </member>
+        <member name="T:ShopBridgeBAL.ProductTypeBL">
+            <summary>
+            Business class of product type 
+            </summary>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductTypeBL.GetProductType(System.Int32)">
+            <summary>
+            Get product type of given id
+            </summary>
+            <param name="id">Product id</param>
+            <returns>Product</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductTypeBL.GetProductTypes">
+            <summary>
+            Get all product types
+            </summary>
+            <returns>List of product types</returns>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductTypeBL.SaveProductType(ShopBridgeBAL.IProductTypeBL)">
+            <summary>
+            Save the product type
+            </summary>
+            <param name="productType">Product type</param>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductTypeBL.UpdateProductType(System.Int32,ShopBridgeBAL.IProductTypeBL)">
+            <summary>
+            Update the product type
+            </summary>
+            <param name="id">Product type id</param>
+            <param name="prodType">Product type to update</param>
+        </member>
+        <member name="M:ShopBridgeBAL.ProductTypeBL.DeleteProductType(System.Int32)">
+            <summary>
+            Delete the product type
+            </summary>
+            <param name="id">Id to delete product type</param>
+        </member>
+    </members>
+</doc>

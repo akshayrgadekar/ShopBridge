@@ -1,0 +1,12 @@
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\ShopBridgeDAL.dll.config
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\ShopBridgeDAL.dll
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\ShopBridgeDAL.pdb
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\EntityFramework.dll
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\EntityFramework.xml
+D:\Personal\ShopBridge\ShopBridgeDAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Personal\ShopBridge\ShopBridgeDAL\obj\Debug\ShopBridgeDAL.csproj.CoreCompileInputs.cache
+D:\Personal\ShopBridge\ShopBridgeDAL\obj\Debug\ShopBridgeDAL.csproj.CopyComplete
+D:\Personal\ShopBridge\ShopBridgeDAL\obj\Debug\ShopBridgeDAL.dll
+D:\Personal\ShopBridge\ShopBridgeDAL\obj\Debug\ShopBridgeDAL.pdb
+D:\Personal\ShopBridge\ShopBridgeDAL\obj\Debug\ShopBridgeDAL.csprojAssemblyReference.cache
